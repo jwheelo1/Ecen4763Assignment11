@@ -2,7 +2,7 @@ REQUIRED_VERSION := 3.7
 PYTHON_VERSION := $(shell python3 --version | grep ^Python | sed 's/^.* //g')
 PYTHON := python3
 PIP := pip3
-PYTHON_VERSION := $(filter $(REQUIRED_VERSION),$(firstword $(sort $(PYTHON_VERSION) $(REQUIRED_VERSION))))
+PYTHON_VERSION_GOOD := $(filter $(REQUIRED_VERSION),$(firstword $(shell printf "%s\n" $(PYTHON_VERSION) $(REQUIRED_VERSION) | sort -V)))
 
 MAX_LINE := 100
 
@@ -27,7 +27,7 @@ clean:
 .python-check:
 	@echo Current Python Version $(PYTHON_VERSION)
 	@echo Required Minimum Python Version $(REQUIRED_VERSION)
-	@[ "${PYTHON_VERSION}" ] && echo "Correct python version installed" || \
+	@[ "${PYTHON_VERSION_GOOD}" ] && echo "Correct python version installed" || \
 		( echo "Python $(REQUIRED_VERSION)+ not installed"; exit 1 )
 
 setup: .python-check
@@ -61,5 +61,3 @@ coverage: test
 	coverage json
 	coverage report -m
 
-runner: .python-check
-	$(PYTHON) runner.py
