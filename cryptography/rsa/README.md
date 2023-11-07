@@ -28,16 +28,21 @@ You will be writing your own RSA algorithm. This means you will need to calculat
     - After initializing the dictionary, call any necessary functions to initialize p, q, phi, e, n, and d. If any are invalid, they will remain None.
     - prime_size dictates the largest prime number you will be using in your encryption.
 - The function encrypt(self, plain_text) return the encryption of the plain_text, update rsa['encrypted'] and rsa['message']
+    - RSA gives a list of numbers for each character, so the encryption will be an array containing integers.
+    - example: [274625, 159618, 300763, 218426, 328509, 279634, 357911]
 - The function decrypt(self, cipher_text) return the decrypted cipher_text, update rsa['decrypted']
+    - cipher_text will be in the same form as the encryption above
+    - this should return a string.
 - The function get_data(self) return the dictionary self.rsa
 - The function get_public_key(self) return public key in tuple form (e, n)
 - The function get_private_key(self) return private key in tuple form (d, n)
 
 ## Tests
 
-- Check if the various strings can be encrypted and decrypted
-- Check if digits can be encrypted and decrypted
-- Check if special characters can be encrypted and decrypted
+- Check if the various strings can be encrypted and decrypted, resulting in the original string
+- Check for values of p, q, e, and phi follow the descriptions given in the rsa slides
+- Check that private and public keys are correct
+- Check with various prime_size parameters
 
 ## Corner Cases
 
@@ -45,7 +50,6 @@ You will be writing your own RSA algorithm. This means you will need to calculat
 - If initialization is invalid, encryption and decryption should return None
 - If the modular inverse does not exist, it should return None
 - If P or Q is None, all other values within self.rsa should be marked as None
-- Must pass time limits (tbd)
 
 ## Library
 
