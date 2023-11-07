@@ -48,8 +48,6 @@ You will be writing your own RSA algorithm. This means you will need to calculat
 
 - Invalid prime sizes (<2, None)
 - If initialization is invalid, encryption and decryption should return None
-- If the modular inverse does not exist, it should return None
-- If P or Q is None, all other values within self.rsa should be marked as None
 
 ## Library
 
